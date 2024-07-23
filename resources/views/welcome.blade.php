@@ -71,7 +71,7 @@
 
                                 <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Laracasts</h2>
 
-                                <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                                <p class="mt-4 text-cyan-500 text-xl leading-relaxed">
                                     ララキャスト
                                 </p>
                             </div>
