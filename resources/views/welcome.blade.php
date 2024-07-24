@@ -18,7 +18,7 @@
         </style> -->
     </head>
     <body class="antialiased">
-        <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-200 selection:bg-red-500 selection:text-white">
+        <div class="relative">
             @if (Route::has('login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                     @auth
@@ -33,8 +33,14 @@
                 </div>
             @endif
 
-            <x-alpine.data />
-
+            <div class="relative bg-center bg-gray-200 selection:bg-red-500 py-4">
+                <div class="mb-8">
+                    <x-alpine.data />
+                </div>
+                <div class="mb-8">
+                    <x-alpine.open />
+                </div>
+            </div>
         </div>
     </body>
 </html>
