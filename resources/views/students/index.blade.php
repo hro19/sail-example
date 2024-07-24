@@ -1,7 +1,7 @@
 {{-- @extends('layouts.app') --}}
 
 {{-- @section('content') --}}
-    <h1>Students</h1>
+    <x-wrap.card title="学生" content="学生一覧ページです" />
 
     <table>
         <thead>
