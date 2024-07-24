@@ -1,4 +1,4 @@
-{{-- @extends('layouts.app') --}}
+<x-app-layout>
 
 {{-- @section('content') --}}
     <x-wrap.card title="学生" content="学生一覧ページです" />
@@ -31,4 +31,4 @@
             @endforeach
         </tbody>
     </table>
-{{-- @endsection --}}
+</x-app-layout>
