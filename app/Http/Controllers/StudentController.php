@@ -64,6 +64,8 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete(); // 指定された学生を削除
+    
+        return redirect()->route('students.index')->with('success', '学生が削除されました');
     }
 }
