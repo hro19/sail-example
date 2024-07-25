@@ -48,7 +48,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        return view('students.edit', compact('student'));
     }
 
     /**
@@ -56,7 +56,18 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        // 1. リクエストデータのバリデーション
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:students,email,' . $student->id,
+            // 他の属性のバリデーションルールも必要に応じて追加
+        ]);
+    
+        // 2. 学生情報の更新
+        $student->update($validatedData);
+    
+        // 3. 更新完了後のリダイレクト
+        return redirect()->route('students.index')->with('success', '学生情報が更新されました');
     }
 
     /**
