@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-wrap.card title="学生" content="学生一覧ページです" />
 
-    <table>
-        <thead>
+    <table class="border border-gray-800">
+        <thead class="border border-gray-800">
             <tr>
                 <th>ID</th>
                 <th>Name</th>
@@ -12,7 +12,7 @@
         </thead>
         <tbody>
             @foreach ($students as $student)
-                <tr>
+                <tr class="border-t border-gray-300">
                     <td>{{ $student->id }}</td>
                     <td>{{ $student->name }}</td>
                     <td>{{ $student->email }}</td>
