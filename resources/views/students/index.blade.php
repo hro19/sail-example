@@ -1,4 +1,11 @@
 <x-app-layout>
+    {{-- 成功メッセージの表示 --}}
+    @if (session('success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            <span class="block sm:inline">{{ session('success') }}</span>
+        </div>
+    @endif
+
     <x-wrap.card title="学生" content="学生一覧ページです" />
 
     <table class="border border-gray-800">
