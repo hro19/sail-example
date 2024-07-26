@@ -8,6 +8,8 @@
 
     <x-wrap.card title="学生" content="学生一覧ページです" />
 
+    <p class="mb-3"><a href="/students/create" class="underline text-gray-800 text-2xl">学生新規追加 ></a></p>
+
     <table class="border border-gray-800">
         <thead class="border border-gray-800">
             <tr>
