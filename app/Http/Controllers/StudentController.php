@@ -21,7 +21,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('students.create');
     }
 
     /**
@@ -29,7 +29,18 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 1. リクエストデータのバリデーション
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:students', // unique:students で students テーブル内で email が一意であることを確認
+            // 他の属性のバリデーションルールも必要に応じて追加
+        ]);
+    
+        // 2. 学生の作成と保存
+        Student::create($validatedData);
+    
+        // 3. 作成完了後のリダイレクト
+        return redirect()->route('students.index')->with('success', '学生が作成されました');
     }
 
     /**
