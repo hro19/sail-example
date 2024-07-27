@@ -7,9 +7,15 @@ use Illuminate\Http\Request;
 
 class RecipeController extends Controller
 {
+    public function home()
+    {
+        $recipes = Recipe::orderBy('created_at', 'desc')->limit(6)->get();
+        return view('home', compact('recipes'));
+    }
+
     public function index()
     {
-        $recipes = Recipe::all(); // 全レシピを取得
+        $recipes = Recipe::all();
         return view('recipes.index', compact('recipes')); // indexビューにレシピデータを渡す
     }
 
