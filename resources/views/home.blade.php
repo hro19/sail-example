@@ -7,6 +7,7 @@
     @endif
 
     <p class="py-3 bg-lime-300">トップページです</p>
+    <p class="py-3 bg-green-300"><a href="{{route('recipes.index')}}" class="underline">recipesページ</a></p>
 
     <div class="relative bg-center bg-gray-200 selection:bg-red-500 py-4">
         <div class="mb-8">
@@ -17,6 +18,7 @@
         </div>
     </div>
 
+    
 
 
 </x-app-layout> 
