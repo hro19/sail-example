@@ -11,20 +11,9 @@
 
     <div class="mx-3">     
         <h2 class="my-3 py-2 px-3 text-3xl border-4 border-yellow-600">レシピ最新</h2>
-        <section class="grid grid-cols-2 gap-4"> 
+        <section class="grid grid-cols-2 gap-4">
             @foreach ($recipes as $recipe)
-                <article class="border border-gray-300 p-4">
-                    <h2 class="text-lg font-bold mb-2">{{ $recipe->title }}</h2>
-                    <p class="text-gray-600">
-                        <span class="font-semibold">ID:</span> {{ $recipe->id }}<br>
-                        <span class="font-semibold">カテゴリー:</span> {{ $recipe->category->name }}<br>
-                        <span class="font-semibold">作成者:</span> {{ $recipe->user->name }}<br>
-                        <span class="font-semibold">閲覧数:</span> {{ $recipe->views }}<br>
-                        <span class="font-semibold">作成日時:</span> {{ $recipe->created_at }}
-                    </p>
-        
-                    <a href="{{ route('recipes.show', $recipe) }}" class="inline-block px-3 py-2 bg-blue-200 mt-2">詳細</a>
-                </article>
+               <x-recipes.front-card :recipe="$recipe" />
             @endforeach
         </section>
     </div>
