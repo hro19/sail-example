@@ -11,7 +11,7 @@
 
     <div class="mx-3">     
         <h2 class="my-3 py-2 px-3 text-3xl border-4 border-yellow-600">レシピ最新</h2>
-        <section class="grid grid-cols-2 gap-4">
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
             @foreach ($recipes as $recipe)
                <x-recipes.front-card :recipe="$recipe" />
             @endforeach
@@ -21,7 +21,7 @@
     
     <div class="mx-3">     
         <h2 class="my-3 py-2 px-3 text-3xl border-4 border-cyan-500">人気レシピ</h2>
-        <section class="grid grid-cols-2 gap-4"> 
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
             @foreach ($populars as $p)
                 <x-recipes.front-card :recipe="$p" />
             @endforeach
