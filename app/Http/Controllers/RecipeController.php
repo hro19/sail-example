@@ -9,8 +9,12 @@ class RecipeController extends Controller
 {
     public function home()
     {
+        //最新数件
         $recipes = Recipe::orderBy('created_at', 'desc')->limit(6)->get();
-        return view('home', compact('recipes'));
+
+        //人気レシピ数件
+        $populars = Recipe::orderBy('views', 'desc')->limit(4)->get();
+        return view('home', compact('recipes','populars'));
     }
 
     public function index()

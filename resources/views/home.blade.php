@@ -6,11 +6,11 @@
         </div>
     @endif
 
-    <p class="py-3 bg-lime-300">トップページです</p>
-    <p class="py-3 bg-green-300"><a href="{{route('recipes.index')}}" class="underline">recipesページ</a></p>
+    <p class="p-3 bg-lime-400"><a href="{{ route('recipes.home') }}" class="underline">トップページ</a></p>
+    <p class="p-3 bg-amber-600"><a href="{{route('recipes.index')}}" class="underline">recipesページ</a></p>
 
     <div class="mx-3">     
-        <h2 class="my-3 py-2 px-3 text-3xl border-4 border-blue-500">レシピ最新</h2>
+        <h2 class="my-3 py-2 px-3 text-3xl border-4 border-yellow-600">レシピ最新</h2>
         <section class="grid grid-cols-2 gap-4"> 
             @foreach ($recipes as $recipe)
                 <article class="border border-gray-300 p-4">
@@ -24,6 +24,27 @@
                     </p>
         
                     <a href="{{ route('recipes.show', $recipe) }}" class="inline-block px-3 py-2 bg-blue-200 mt-2">詳細</a>
+                </article>
+            @endforeach
+        </section>
+    </div>
+
+    
+    <div class="mx-3">     
+        <h2 class="my-3 py-2 px-3 text-3xl border-4 border-cyan-500">人気レシピ</h2>
+        <section class="grid grid-cols-2 gap-4"> 
+            @foreach ($populars as $p)
+                <article class="border border-gray-300 p-4">
+                    <h2 class="text-lg font-bold mb-2">{{ $p->title }}</h2>
+                    <p class="text-gray-600">
+                        <span class="font-semibold">ID:</span> {{ $p->id }}<br>
+                        <span class="font-semibold">カテゴリー:</span> {{ $p->category->name }}<br>
+                        <span class="font-semibold">作成者:</span> {{ $p->user->name }}<br>
+                        <span class="font-semibold">閲覧数:</span> {{ $p->views }}<br>
+                        <span class="font-semibold">作成日時:</span> {{ $p->created_at }}
+                    </p>
+        
+                    <a href="{{ route('recipes.show', $p) }}" class="inline-block px-3 py-2 bg-cyan-400 mt-2">詳細</a>
                 </article>
             @endforeach
         </section>
