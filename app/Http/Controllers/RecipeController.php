@@ -19,7 +19,7 @@ class RecipeController extends Controller
 
     public function index()
     {
-        $recipes = Recipe::all();
+        $recipes = Recipe::all(); //SoftDeletesによりカラムが NULL のレコードのみを取得します
         // dd($recipes);
         return view('recipes.index', compact('recipes')); // indexビューにレシピデータを渡す
     }

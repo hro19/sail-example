@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Recipe extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    use SoftDeletes; //論理削除を使うために追加
 
     protected $casts = [
         'id' => 'string'

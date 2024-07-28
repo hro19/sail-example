@@ -11,6 +11,7 @@
 
     <div class="mx-3">     
         <h2 class="my-3 py-2 px-3 text-3xl border-4 border-yellow-600">レシピ最新</h2>
+        <p class="mb-3"><a href={{route('recipes.index')}} class="underline text-lg">全てのレシピ ></a></p>
         <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
             @foreach ($recipes as $recipe)
                <x-recipes.front-card :recipe="$recipe" />
