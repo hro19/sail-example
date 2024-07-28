@@ -16,18 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [RecipeController::class, 'home'])->name('recipes.home');
+Route::get('/', [RecipeController::class, 'home'])->name('recipe.home');
 
 Route::resource('students', StudentController::class);
 
-Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes.index');
-Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipes.show');
-Route::get('/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
-Route::post('/recipes', [RecipeController::class, 'store'])->name('recipes.store');
-Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
-
-// レシピ削除処理
-Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
+Route::get('/recipes', [RecipeController::class, 'index'])->name('recipe.index');
+Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipe.show');
+Route::get('/recipes/create', [RecipeController::class, 'create'])->name('recipe.create');
+Route::post('/recipes', [RecipeController::class, 'store'])->name('recipe.store');
+Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipe.destroy');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

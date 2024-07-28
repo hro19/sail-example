@@ -6,15 +6,14 @@
         </div>
     @endif
 
-    <p class="p-3 bg-lime-400"><a href="{{ route('recipes.home') }}" class="underline">トップページ</a></p>
-    <p class="p-3 bg-amber-600"><a href="{{route('recipes.index')}}" class="underline">recipesページ</a></p>
+    <p class="p-3 bg-lime-400"><a href="{{ route('recipe.home') }}" class="underline">トップページ</a></p>
+    <p class="p-3 bg-amber-600"><a href="{{route('recipe.index')}}" class="underline">recipesページ</a></p>
 
     <div class="mx-3">     
         <h2 class="my-3 py-2 px-3 text-3xl border-4 border-yellow-600">
           <svg class="inline-block w-9 mr-1 -mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125Z" />
           </svg>レシピ最新</h2>
-        <p class="mb-3"><a href={{route('recipes.index')}} class="underline text-lg">全てのレシピ ></a></p>
         <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
             @foreach ($recipes as $recipe)
                <x-recipes.front-card :recipe="$recipe" />
