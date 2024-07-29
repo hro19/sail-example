@@ -41,7 +41,7 @@
                   <label for="rating4">4以上</label>
                 </div>
               </div> 
-              {{-- <div class="mb-4 p-6 border border-gray-300">
+              <div class="mb-4 p-6 border border-gray-300">
                 <label class="text-lg text-gray-800">カテゴリー</label>
             @foreach($categories as $category)
                 <div class="ml-4 mb-2">
@@ -49,11 +49,11 @@
                   <label for="category{{$category['id']}}">{{$category['name']}}</label>
                 </div>
             @endforeach
-              </div>  --}}
-              {{-- <input type="text" name="title" value="{{ $filters['title'] ?? '' }}" placeholder="レシピ名を入力" class="border border-gray-300 p-2 mb-4 w-full">
+              </div> 
+              <input type="text" name="title" value="{{ $filters['title'] ?? '' }}" placeholder="レシピ名を入力" class="border border-gray-300 p-2 mb-4 w-full">
               <div class="text-center">
                 <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">検索</button>
-              </div> --}}
+              </div>
             </form>
           </div>
     </div>

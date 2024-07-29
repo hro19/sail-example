@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Recipe;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class RecipeController extends Controller
@@ -20,8 +21,9 @@ class RecipeController extends Controller
     public function index()
     {
         $recipes = Recipe::all(); //SoftDeletesによりカラムが NULL のレコードのみを取得します
+        $categories = Category::all();
         // dd($recipes);
-        return view('recipes.index', compact('recipes')); // indexビューにレシピデータを渡す
+        return view('recipes.index', compact('recipes','categories')); // indexビューにレシピデータを渡す
     }
 
     public function create()
