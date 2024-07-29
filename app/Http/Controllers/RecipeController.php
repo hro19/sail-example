@@ -19,8 +19,11 @@ class RecipeController extends Controller
         return view('home', compact('recipes','populars'));
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $fillter = $request->all();
+        //dd($fillter);
+
         $recipes = Recipe::select('recipes.*', \DB::raw('AVG(reviews.rating) as rating'))
         ->join('users', 'users.id', '=', 'recipes.user_id')
         ->leftJoin('reviews', 'reviews.recipe_id', '=', 'recipes.id')

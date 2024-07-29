@@ -50,10 +50,10 @@
                 </div>
             @endforeach
               </div> 
-              {{-- <input type="text" name="title" value="{{ $filters['title'] ?? '' }}" placeholder="レシピ名を入力" class="border border-gray-300 p-2 mb-4 w-full">
+              <input type="text" name="title" value="{{ $filters['title'] ?? '' }}" placeholder="レシピ名を入力" class="border border-gray-300 p-2 mb-4 w-full">
               <div class="text-center">
                 <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">検索</button>
-              </div> --}}
+              </div>
             </form>
           </div>
     </div>
