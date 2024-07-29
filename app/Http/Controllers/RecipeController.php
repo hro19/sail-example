@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Recipe;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RecipeController extends Controller
 {
@@ -20,7 +21,10 @@ class RecipeController extends Controller
 
     public function index()
     {
-        $recipes = Recipe::select('*')
+        $recipes = Recipe::select('recipes.*', \DB::raw('AVG(reviews.rating) as rating'))
+        ->join('users', 'users.id', '=', 'recipes.user_id')
+        ->leftJoin('reviews', 'reviews.recipe_id', '=', 'recipes.id')
+        ->groupBy('recipes.id')
         ->orderBy('recipes.created_at', 'desc')
         ->get();
         $categories = Category::all();

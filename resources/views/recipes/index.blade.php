@@ -65,6 +65,7 @@
                 <th>タイトル</th>
                 <th>カテゴリー</th>
                 <th>作成者</th>
+                <th>評価値</th>
                 <th>閲覧数</th>
                 <th>作成日時</th>
                 <th>アクション</th>
@@ -77,6 +78,7 @@
                     <td>{{ $recipe->title }}</td>
                     <td>{{ $recipe->category->name }}</td> {{-- カテゴリー名を表示 --}}
                     <td>{{ $recipe->user->name }}</td>   {{-- 作成者名を表示 --}}
+                    <td>{{ number_format($recipe->rating, 2) }}</td>
                     <td>{{ $recipe->views }}</td>
                     <td>{{ $recipe->created_at->format('Y年m月d日') }}</td>
                     <td>
