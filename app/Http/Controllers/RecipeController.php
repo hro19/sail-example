@@ -12,7 +12,7 @@ class RecipeController extends Controller
     public function home()
     {
         //最新数件
-        $recipes = Recipe::orderBy('created_at', 'desc')->limit(6)->get();
+        $recipes = Recipe::query()->orderBy('created_at', 'desc')->limit(6)->get();
 
         //人気レシピ数件
         $populars = Recipe::orderBy('views', 'desc')->limit(4)->get();
@@ -21,19 +21,28 @@ class RecipeController extends Controller
 
     public function index(Request $request)
     {
-        $fillter = $request->all();
-        //dd($fillter);
+        $filters = $request->all();
+        // dd($filters);
 
-        $recipes = Recipe::select('recipes.*', \DB::raw('AVG(reviews.rating) as rating'))
+        $query = Recipe::select('recipes.*', \DB::raw('AVG(reviews.rating) as rating'))
         ->join('users', 'users.id', '=', 'recipes.user_id')
         ->leftJoin('reviews', 'reviews.recipe_id', '=', 'recipes.id')
         ->groupBy('recipes.id')
-        ->orderBy('recipes.created_at', 'desc')
-        ->get();
-        $categories = Category::all();
-        //dd($recipes);
-        return view('recipes.index', compact('recipes','categories')); // indexビューにレシピデータを渡す
-    }
+        ->orderBy('recipes.created_at', 'desc');
+
+        if( !empty($filters) ) {
+            // もしカテゴリーが選択されていたら
+            if( !empty($filters['categories']) ) {
+                // カテゴリーで絞り込み選択したカテゴリーIDが含まれているレシピを取得
+                $query->whereIn('recipes.category_id', $filters['categories']);
+            }
+        }
+    $recipes = $query->get();
+    // dd($recipes);
+    $categories = Category::all();
+
+    return view('recipes.index', compact('recipes', 'categories', 'filters'));
+}
 
     public function create()
     {
