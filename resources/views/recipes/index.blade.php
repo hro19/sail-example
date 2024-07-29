@@ -50,10 +50,10 @@
                 </div>
             @endforeach
               </div> 
-              <input type="text" name="title" value="{{ $filters['title'] ?? '' }}" placeholder="レシピ名を入力" class="border border-gray-300 p-2 mb-4 w-full">
+              {{-- <input type="text" name="title" value="{{ $filters['title'] ?? '' }}" placeholder="レシピ名を入力" class="border border-gray-300 p-2 mb-4 w-full">
               <div class="text-center">
                 <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">検索</button>
-              </div>
+              </div> --}}
             </form>
           </div>
     </div>
@@ -78,7 +78,7 @@
                     <td>{{ $recipe->category->name }}</td> {{-- カテゴリー名を表示 --}}
                     <td>{{ $recipe->user->name }}</td>   {{-- 作成者名を表示 --}}
                     <td>{{ $recipe->views }}</td>
-                    <td>{{ $recipe->created_at }}</td>
+                    <td>{{ $recipe->created_at->format('Y年m月d日') }}</td>
                     <td>
                         <a href="{{ route('recipe.show', $recipe) }}" class="inline-block px-3 py-2 bg-blue-200">詳細</a>
                         {{-- <a href="{{ route('recipes.edit', $recipe) }}" class="inline-block px-3 py-2 bg-green-200">編集</a> --}}
