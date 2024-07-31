@@ -31,6 +31,11 @@
                   <label for="rating0">指定しない</label>
                 </div>
                 <div class="ml-4 mb-2">
+                  <input type="radio" name="rating" value="2" id="rating2"
+                  {{ ($filters['rating'] ?? null) == "2" ? 'checked' : ''}}/>
+                  <label for="rating2">2以上</label>
+                </div>
+                <div class="ml-4 mb-2">
                   <input type="radio" name="rating" value="3" id="rating3"
                   {{ ($filters['rating'] ?? null) == "3" ? 'checked' : ''}}/>
                   <label for="rating3">3以上</label>
