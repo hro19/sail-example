@@ -41,6 +41,11 @@ class RecipeController extends Controller
                 // 評価値で絞り込み選択した評価値が含まれているレシピを取得
                 $query->having('rating', '>=', $filters['rating']);
             }
+            // もしタイトルが入っていたら
+            if( !empty($filters['title']) ) {
+                // タイトルで絞り込みタイトルが含まれているレシピを取得
+                $query->where('recipes.title', 'like', '%'.$filters['title'].'%');
+            }
         }
     $recipes = $query->get();
     // dd($recipes);
