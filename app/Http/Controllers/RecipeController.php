@@ -77,7 +77,8 @@ class RecipeController extends Controller
 
     public function show(Recipe $recipe)
     {
-        return view('recipes.show', compact('recipe')); // showビューにレシピデータを渡す
+        $rating = $recipe->reviews()->avg('rating');
+        return view('recipes.show', compact('recipe', 'rating')); // showビューにレシピデータと評価値を渡す
     }
 
     public function edit(Recipe $recipe)
