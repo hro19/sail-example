@@ -38,7 +38,7 @@ ShowCommonAttributes=0
 BugFixEntityWidth=1
 
 [Entity]
-PName=recipe
+PName=recipes
 LName=レシピ
 Comment=
 TableInnerOption=
@@ -46,7 +46,7 @@ TableOption=
 Page=MAIN
 Left=1600
 Top=1100
-Field="ID","id","vachar(72)",,0,"","",$FFFFFFFF,""
+Field="ID","id","vachar(36)",,0,"","",$FFFFFFFF,""
 Field="ユーザーID","user_id","vachar(72)",,,"","",$FFFFFFFF,""
 Field="カテゴリーID","category_id","vachar(10)",,,"","",$FFFFFFFF,""
 Field="タイトル","title","vachar(128)",,,"","",$FFFFFFFF,""
@@ -59,7 +59,7 @@ Field="削除（論理）日時","deleted_at","DATE",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20240731184356
+ModifiedDateTime=20240731185133
 Position="MAIN",1600,1100,500,325
 ZOrder=1
 
@@ -85,7 +85,7 @@ Position="MAIN",2500,1000,466,204
 ZOrder=2
 
 [Relation]
-Entity1=recipe
+Entity1=recipes
 Entity2=categories
 RelationType1=1
 RelationType2=3
@@ -118,13 +118,13 @@ Top=1350
 Field="ID","id","char(36)",,0,"","",$FFFFFFFF,""
 Field="レシピID","recipe_id","char(36)",,,"","",$FFFFFFFF,""
 Field="材料名","name","char(36)",,,"","",$FFFFFFFF,""
-Field="量","quantity","char(36)",,,"","",$FFFFFFFF,""
+Field="量（例：グラム、カップ）","quantity","char(36)",,,"","",$FFFFFFFF,""
 Field="更新日時","updated_at","char(36)",,,"","",$FFFFFFFF,""
 Field="新規作成日時","created_at","char(36)",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20240731180903
+ModifiedDateTime=20240731185249
 Position="Main",2500,1350,495,217
 ZOrder=4
 
@@ -140,12 +140,13 @@ Top=1750
 Field="ID","id","char(32)",,0,"","",$FFFFFFFF,""
 Field="レシピID","recipe_id","char(32)",,,"","",$FFFFFFFF,""
 Field="手順番","step_number","NUMBER(10,0)",,,"","",$FFFFFFFF,""
+Field="説明","descripton","char(512)",,,"","",$FFFFFFFF,""
 Field="更新日時","updated_at","DATE",,,"","",$FFFFFFFF,""
 Field="新規作成日時","created_at","DATE",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20240731181356
+ModifiedDateTime=20240731185348
 Position="Main",2500,1750,479,230
 ZOrder=5
 
@@ -196,7 +197,7 @@ Position="Main",850,1300,516,235
 ZOrder=7
 
 [Relation]
-Entity1=recipe
+Entity1=recipes
 Entity2=reviews
 RelationType1=1
 RelationType2=3
@@ -241,7 +242,7 @@ ZOrder=9
 
 [Relation]
 Entity1=users
-Entity2=recipe
+Entity2=recipes
 RelationType1=1
 RelationType2=3
 Fields1=id
@@ -262,7 +263,7 @@ TermPos2=R
 ZOrder=10
 
 [Relation]
-Entity1=recipe
+Entity1=recipes
 Entity2=ingredients
 RelationType1=1
 RelationType2=3
@@ -284,7 +285,7 @@ TermPos2=R
 ZOrder=11
 
 [Relation]
-Entity1=recipe
+Entity1=recipes
 Entity2=steps
 RelationType1=1
 RelationType2=3
