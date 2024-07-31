@@ -26,6 +26,7 @@
                 <label class="text-lg text-gray-800">評価</label>
                 <div class="ml-4 mb-2">
                   <input type="radio" name="rating" value="0" id="rating0"
+                    {{-- もしからならばnullとして三項演算子 --}}
                     {{ ($filters['rating'] ?? null) == null ? 'checked' : ''}}/>
                     <!-- もしratingのフィルターがあったら、空文字を返す、そうでなければ ’checked'を返す -->
                   <label for="rating0">指定しない</label>
