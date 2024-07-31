@@ -79,8 +79,10 @@ class RecipeController extends Controller
     {
          // レシピの閲覧数を1増やす
         $recipe->increment('views');
-        
+
         $rating = $recipe->reviews()->avg('rating');
+        $recipe = Recipe::with('category', 'ingredients', 'steps', 'reviews')->find($recipe->id);
+        
         return view('recipes.show', compact('recipe', 'rating')); // showビューにレシピデータと評価値を渡す
     }
 
