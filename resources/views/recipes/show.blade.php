@@ -20,6 +20,12 @@
           <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-4">
               <h2 class="text-2xl font-bold text-white">{{ $recipe->title }}</h2>
           </div>
+
+          <div>
+            <figure class="w-full mt-6">
+              <img src="{{ $recipe->image }}" alt="{{ $recipe->title }}" class="w-full h-64 object-contain">
+            </figure>
+          </div>
   
           <div class="p-6">
               <section class="mb-8">
