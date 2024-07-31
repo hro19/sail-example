@@ -39,7 +39,8 @@ class RecipeController extends Controller
             // もし評価値のラジオボタンが押されていたら
             if( !empty($filters['rating']) ) {
                 // 評価値で絞り込み選択した評価値が含まれているレシピを取得
-                $query->having('rating', '>=', $filters['rating']);
+                $query->having('rating', '>=', $filters['rating'])
+                ->orderBy('rating', 'desc');
             }
             // もしタイトルが入っていたら
             if( !empty($filters['title']) ) {
