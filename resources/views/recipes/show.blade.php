@@ -56,7 +56,20 @@
               </section>
           </div>
       </div>
-      
+
+      <div class="mt-12 bg-white shadow-md rounded-lg p-6">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">材料</h3>
+        <ul class="space-y-3">
+            @foreach($recipe->ingredients as $ingredient)
+                <li class="flex items-center text-gray-700">
+                    <span class="w-2 h-2 bg-indigo-500 rounded-full mr-3"></span>
+                    <span class="font-bold text-2xl">{{ $ingredient->name }}:</span>
+                    <span class="ml-2 text-gray-600">{{ $ingredient->quantity }}</span>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+
     <div class="mt-12 bg-white shadow-md rounded-lg p-6">
         <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">手順</h3>
         <ol class="space-y-3">
