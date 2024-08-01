@@ -81,8 +81,13 @@ class RecipeController extends Controller
         $recipe->increment('views');
 
         $rating = $recipe->reviews()->avg('rating');
-        $recipe = Recipe::with('category', 'ingredients', 'steps', 'reviews')->find($recipe->id);
-        
+        $recipe = Recipe::with(['category', 'ingredients', 
+        'steps' => function($query) {
+            $query->orderBy('step_number', 'asc');
+        }, 
+        'reviews'])
+    ->find($recipe->id);
+        // dd($recipe);
         return view('recipes.show', compact('recipe', 'rating')); // showビューにレシピデータと評価値を渡す
     }
 
