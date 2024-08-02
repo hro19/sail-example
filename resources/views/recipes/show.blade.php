@@ -81,6 +81,37 @@
             @endforeach
         </ol>
     </div>
+
+    <section class="mt-8">
+        <h3 class="text-2xl font-bold mb-4 text-gray-800">レビュー</h3>
+        @forelse($recipe->reviews as $review)
+            <div class="bg-white shadow-md rounded-lg p-4 mb-4">
+                <div class="flex items-center mb-2">
+                    <div class="flex text-yellow-400">
+                        @for ($i = 1; $i <= 5; $i++)
+                            @if ($i <= $review->rating)
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                    <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"/>
+                                </svg>
+                            @else
+                                <svg class="w-5 h-5 fill-current text-gray-300" viewBox="0 0 24 24">
+                                    <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z"/>
+                                </svg>
+                            @endif
+                        @endfor
+                    </div>
+                    <span class="ml-2 text-gray-600">{{ $review->rating }}スター</span>
+                </div>
+                <p class="text-gray-700">{{ $review->comment }}</p>
+                <div class="mt-2 text-sm text-gray-500">
+                    投稿者: {{ $review->user->name }} | {{ $review->created_at->format('Y年m月d日') }}
+                </div>
+            </div>
+        @empty
+            <p class="text-gray-600">まだレビューがありません。</p>
+        @endforelse
+    </section>
+
       <div class="mt-8 text-center">
           <a href="{{ route('recipe.index') }}" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold py-2 px-6 rounded-full hover:from-blue-600 hover:to-purple-700 transition duration-300">
               レシピ一覧に戻る
