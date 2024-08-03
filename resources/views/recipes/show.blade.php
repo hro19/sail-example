@@ -72,14 +72,16 @@
 
     <div class="mt-12 bg-white shadow-md rounded-lg p-6">
         <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">手順</h3>
-        <ol class="space-y-3">
-            @foreach($recipe->steps as $step)
-                <li class="flex items-start">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        @foreach($recipe->steps as $step)
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <div class="flex items-center mb-4">
                     <span class="w-8 h-8 bg-indigo-500 rounded-full text-white flex items-center justify-center mr-3">{{ $step->step_number }}</span>
-                    <span class="text-gray-700">{{ $step->description }}</span>
-                </li>
-            @endforeach
-        </ol>
+                    <h3 class="text-xl font-bold text-gray-800">{{ $step->description }}</h3>
+                </div>
+            </div>
+        @endforeach
+        </div>
     </div>
 
     <section class="mt-8">
