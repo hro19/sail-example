@@ -22,9 +22,13 @@ Route::get('/', [RecipeController::class, 'home'])->name('recipe.home');
 
 Route::resource('students', StudentController::class);
 
+Route::middleware('auth')->group(function () {
+    Route::get('/recipes/create', [RecipeController::class, 'create'])->name('recipe.create');
+    Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipe.show');
+});
+
 Route::get('/recipes', [RecipeController::class, 'index'])->name('recipe.index');
-Route::get('/recipes/create', [RecipeController::class, 'create'])->name('recipe.create');
-Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->name('recipe.show');
+
 Route::post('/recipes', [RecipeController::class, 'store'])->name('recipe.store');
 Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipe.destroy');
 
