@@ -69,6 +69,7 @@ class RecipeController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'category_id' => 'required|exists:categories,id',
+            "image" => "file|image|mimes:jpeg,png,jpg,gif|max:2048",
         ]);
     
         $recipe = new Recipe();
