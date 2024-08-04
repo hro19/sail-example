@@ -28,7 +28,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/recipes', [RecipeController::class, 'index'])->name('recipe.index');
-
 Route::post('/recipes', [RecipeController::class, 'store'])->name('recipe.store');
 Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipe.destroy');
 

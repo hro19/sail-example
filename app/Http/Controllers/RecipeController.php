@@ -57,7 +57,9 @@ class RecipeController extends Controller
 
     public function create()
     {
-        return view('recipes.create'); // createビューを表示
+        $categories = Category::all(); // カテゴリー一覧を取得
+
+        return view('recipes.create', compact('categories')); // createビューにカテゴリー一覧を渡す
     }
 
     public function store(Request $request)
