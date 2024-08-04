@@ -6,6 +6,7 @@ use App\Models\Recipe;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class RecipeController extends Controller
 {
@@ -64,17 +65,28 @@ class RecipeController extends Controller
 
     public function store(Request $request)
     {
-        // バリデーション
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
             'category_id' => 'required|exists:categories,id',
-            // 他の必要なバリデーションルールを追加
         ]);
-
-        // レシピの作成と保存
-        Recipe::create($validatedData);
-
-        return redirect()->route('recipes.index')->with('success', 'レシピが作成されました');
+    
+        $recipe = new Recipe();
+        $recipe->id = Str::uuid()->toString();
+        $recipe->user_id = auth()->id();
+        $recipe->category_id = $validatedData['category_id'];
+        $recipe->title = $validatedData['title'];
+        $recipe->description = $validatedData['description'];
+    
+        // 画像の保存 (もしあれば)
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('public/recipe_images');
+            $recipe->image = $imagePath;
+        }
+    
+        $recipe->save();
+    
+        return redirect()->route('recipe.index')->with('success', 'レシピが作成されました');
     }
 
     public function show(Recipe $recipe)

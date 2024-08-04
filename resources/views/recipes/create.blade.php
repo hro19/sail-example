@@ -25,10 +25,10 @@ r="category_id">カテゴリー</label>
             </select>
         </div>
 
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="image">画像</label>
             <input type="file" name="image" id="image" class="form-control-file">
-        </div>
+        </div> --}}
 
         <button type="submit" class="btn btn-primary">   
 レシピを作成</button>
