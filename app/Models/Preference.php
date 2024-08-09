@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Preference extends Model
 {
     use HasFactory;
-    
+
     // fillableを設定
     protected $fillable = ['student_id', 'name'];
 
@@ -17,4 +17,6 @@ class Preference extends Model
     {
         return $this->belongsTo(Student::class);
     }
+    // idカラムの自動増分を無効にする
+    public $incrementing = false;
 }

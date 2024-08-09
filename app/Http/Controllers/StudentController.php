@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\Preference;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -32,12 +33,23 @@ class StudentController extends Controller
         // 1. リクエストデータのバリデーション
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:students', // unique:students で students テーブル内で email が一意であることを確認
+            'email' => 'required|string|email|max:255|unique:students', 
+            'preferences' => 'required|array', // preferences が配列であることを確認
+            'preferences.*' => 'required|string|max:255', // 各 preference が空でない文字列で、最大長が 255 文字であることを確認
             // 他の属性のバリデーションルールも必要に応じて追加
         ]);
     
         // 2. 学生の作成と保存
-        Student::create($validatedData);
+        $student = Student::create($request->only('name', 'email'));
+    
+        foreach ($request->input('preferences', []) as $preferenceName) {
+            if (! empty($preferenceName)) {
+                Preference::create([
+                    'name' => $preferenceName,
+                    'student_id' => $student->id // 学生のIDを追加
+                ]);
+            }
+        }
     
         // 3. 作成完了後のリダイレクト
         return redirect()->route('students.index')->with('success', '学生が作成されました');
