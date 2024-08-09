@@ -48,9 +48,6 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        // $student には、指定された ID の Student モデルインスタンスが自動的に注入されます。
-        // もし存在しない ID が指定された場合は、404 エラーが自動的に返されます。
-    
         return view('students.show', compact('student'));
     }
 

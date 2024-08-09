@@ -14,4 +14,10 @@ class Student extends Model
     ];
     
     use HasFactory;
+
+    // preferencesとのリレーションを定義
+    public function preferences()
+    {
+        return $this->hasMany(Preference::class);
+    }
 }
