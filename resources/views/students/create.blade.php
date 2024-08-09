@@ -1,75 +1,81 @@
 <x-app-layout>
-    <x-wrap.card title="学生作成" content="新しい学生を作成できます" />
-    <form action="{{ route('students.store') }}" method="POST" class="space-y-4"> 
-        @csrf
-    
-        <div>
-            <label for="name" class="block text-sm font-medium text-gray-700">名前:</label>
-            <input 
-                type="text" 
-                id="name" 
-                name="name" 
-                value="{{ old('name') }}" 
-                required 
-                class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50   
-   
-"
-            >
-            @error('name')
-                <div class="text-red-500">{{ $message }}</div>
-            @enderror
-        </div>
-    
-        <div>
-            <label for="email" class="block text-sm font-medium text-gray-700">メールアドレス:</label>
-            <input 
-                type="email" 
-                id="email" 
-                name="email" 
-                value="{{ old('email') }}" 
-                required 
-                class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50   
-"
-            >
-            @error('email')
-                <div class="text-red-500">{{ $message }}</div>
-            @enderror
-        </div>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <x-wrap.card title="学生作成" content="新しい学生を作成できます" />
+                    
+                    <form action="{{ route('students.store') }}" method="POST" class="mt-8 space-y-6"> 
+                        @csrf
+                    
+                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700">名前</label>
+                                <div class="mt-1">
+                                    <input type="text" id="name" name="name" value="{{ old('name') }}" required 
+                                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                </div>
+                                @error('name')
+                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+                    
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700">メールアドレス</label>
+                                <div class="mt-1">
+                                    <input type="email" id="email" name="email" value="{{ old('email') }}" required 
+                                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                </div>
+                                @error('email')
+                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
 
-        <d   
-iv id="preferences-container">
-            @for ($i = 0; $i < 3; $i++) 
-                <div class="mb-4 flex items-center">
-                    <label for="preference_{{ $i }}" class="block text-sm font-medium text-gray-700">好物 {{ $i + 1 }}:</label>
-                    <input 
-                        type="text" 
-                        id="preference_{{ $i }}" 
-                        name="preferences[]" 
-                        value="{{ old('preferences.' . $i) }}" 
-                        class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                    >
-                    <butt   
-on type="button" class="ml-2 px-4 py-2 text-white bg-red-500 remove-preference">削除</button>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">好物</label>
+                            <div id="preferences-container" class="mt-2 space-y-3">
+                                @for ($i = 0; $i < 1; $i++) 
+                                    <div class="flex items-center space-x-2">
+                                        <input type="text" name="preferences[]" value="{{ old('preferences.' . $i) }}" 
+                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                        <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 remove-preference">
+                                            削除
+                                        </button>
+                                    </div>
+                                @endfor
+                            </div>
+                            <button type="button" id="add-preference" class="mt-3 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                好物を追加
+                            </button>
+                        </div>
+                    
+                        <div class="pt-5">
+                            <div class="flex justify-end">
+                                <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    作成
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            @endfor
+            </div>
         </div>
-
-        <button type="button" id="add-preference" class="px-6 py-2 text-white bg-blue-500 mb-4">Add Preference</button>
-    
-        <button type="submit" class="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600">作成</button>
-    </form>
+    </div>
 
     <script>
         const addPreferenceButton = document.getElementById('add-preference');
         const preferencesContainer = document.getElementById('preferences-container');
-        let preferenceCount = 3; // 初期は3つの入力フィールド
+        let preferenceCount = 1; // 初期は3つの入力フィールド
 
         addPreferenceButton.addEventListener('click', () => {
             const newPreferenceInput = `
-                <div class="mb-4 flex items-center">
-                    <label for="preference_${preferenceCount}">好物 ${preferenceCount + 1}:</label>
-                    <input type="text" id="preference_${preferenceCount}" name="preferences[]">
-                    <button type="button" class="ml-2 px-4 py-2 text-white bg-red-500 remove-preference">削除</button>
+                <div class="flex items-center space-x-2">
+                    <input type="text" id="preference_${preferenceCount}" name="preferences[]" 
+                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                    <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 remove-preference">
+                        削除
+                    </button>
                 </div>
             `;
             preferencesContainer.insertAdjacentHTML('beforeend', newPreferenceInput);
@@ -78,9 +84,10 @@ on type="button" class="ml-2 px-4 py-2 text-white bg-red-500 remove-preference">
 
         preferencesContainer.addEventListener('click', (event) => {
             if (event.target.classList.contains('remove-preference')) {
-                event.target.parentElement.remove();
+                event.target.closest('div').remove();
                 preferenceCount--; 
             }
         });
+        
     </script>
 </x-app-layout>

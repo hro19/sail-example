@@ -34,8 +34,8 @@ class StudentController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:students', 
-            'preferences' => 'required|array', // preferences が配列であることを確認
-            'preferences.*' => 'required|string|max:255', // 各 preference が空でない文字列で、最大長が 255 文字であることを確認
+            'preferences' => 'present|array',
+            'preferences.*' => 'nullable|string|max:255',
             // 他の属性のバリデーションルールも必要に応じて追加
         ]);
     
@@ -43,7 +43,7 @@ class StudentController extends Controller
         $student = Student::create($request->only('name', 'email'));
     
         foreach ($request->input('preferences', []) as $preferenceName) {
-            if (! empty($preferenceName)) {
+            if (!empty(trim($preferenceName))) { 
                 Preference::create([
                     'name' => $preferenceName,
                     'student_id' => $student->id // 学生のIDを追加
