@@ -64,40 +64,42 @@
           </div>
     </div>
 
-    <table class="border border-gray-800">
-        <thead class="border border-gray-800">
-            <tr>
-                <th>ID</th>
-                <th>タイトル</th>
-                <th>カテゴリー</th>
-                <th>作成者</th>
-                <th>評価値</th>
-                <th>閲覧数</th>
-                <th>作成日時</th>
-                <th>アクション</th>
-            </tr>
+    <div class="mx-8 overflow-x-auto"> 
+      <table class="min-w-full table-auto border-collapse border border-gray-800">
+        <thead class="bg-gray-200 border-b border-gray-800">
+          <tr>
+            <th class="px-4 py-2 text-left font-bold text-gray-800">ID</th>
+            <th class="px-4 py-2 text-left font-bold text-gray-800">タイトル</th>
+            <th class="px-4 py-2 text-left font-bold text-gray-800">カテゴリー</th>
+            <th class="px-4 py-2 text-left font-bold text-gray-800">作成者</th>
+            <th class="px-4 py-2 text-left font-bold text-gray-800">評価値</th>
+            <th class="px-4 py-2 text-left font-bold text-gray-800">閲覧数</th>
+            <th class="px-4 py-2 text-left font-bold text-gray-800">作成日時</th>
+            <th class="px-4 py-2 text-left font-bold text-gray-800">アクション</th>
+          </tr>
         </thead>
         <tbody>
-            @foreach ($recipes as $recipe)
-                <tr class="border-t border-gray-300">
-                    <td>{{ $recipe->id }}</td>
-                    <td>{{ $recipe->title }}</td>
-                    <td>{{ $recipe->category->name }}</td> {{-- カテゴリー名を表示 --}}
-                    <td>{{ $recipe->user->name }}</td>   {{-- 作成者名を表示 --}}
-                    <td>{{ number_format($recipe->rating, 2) }}</td>
-                    <td>{{ $recipe->views }}</td>
-                    <td>{{ $recipe->created_at->format('Y年m月d日') }}</td>
-                    <td>
-                        <a href="{{ route('recipe.show', $recipe) }}" class="inline-block px-3 py-2 bg-blue-200">詳細</a>
-                        {{-- <a href="{{ route('recipes.edit', $recipe) }}" class="inline-block px-3 py-2 bg-green-200">編集</a> --}}
-                        <form action="{{ route('recipe.destroy', $recipe) }}" method="POST" class="inline-block px-3 py-2 bg-pink-200">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" onclick="return confirm('本当に削除しますか？');">削除</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
+          @foreach ($recipes as $recipe)
+          <tr class="border-b border-gray-300 hover:bg-gray-100">
+            <td class="px-4 py-2">{{ $recipe->id }}</td>
+            <td class="px-4 py-2">{{ $recipe->title }}</td>
+            <td class="px-4 py-2">{{ $recipe->category->name }}</td> 
+            <td class="px-4 py-2">{{ $recipe->user->name }}</td> 
+            <td class="px-4 py-2">{{ number_format($recipe->rating, 2) }}</td>
+            <td class="px-4 py-2">{{ $recipe->views }}</td>
+            <td class="px-4 py-2">{{ $recipe->created_at->format('Y年m月d日') }}</td>
+            <td class="px-4 py-2">
+              <a href="{{ route('recipe.show', $recipe) }}" class="inline-block px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">詳細</a>
+              {{-- <a href="{{ route('recipes.edit', $recipe) }}" class="inline-block px-3 py-2 bg-green-500 text-white rounded hover:bg-green-700">編集</a> --}}
+              <form action="{{ route('recipe.destroy', $recipe) }}" method="POST" class="inline-block">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-700" onclick="return confirm('本当に削除しますか？');">削除</button>
+              </form>
+            </td>
+          </tr>
+          @endforeach
         </tbody>
-    </table>
+      </table>
+    </div>
 </x-app-layout>
