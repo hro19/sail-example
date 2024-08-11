@@ -26,7 +26,7 @@
 
           <div>
             <figure class="w-full mt-6">
-              <img src="{{ $recipe->image }}" alt="{{ $recipe->title }}" class="w-full h-64 object-contain">
+                <img src="{{ Storage::url(str_replace('public/', '', $recipe->image)) }}" alt="{{ $recipe->title }}" class="w-full h-64 object-contain">
             </figure>
           </div>
   

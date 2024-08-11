@@ -15,6 +15,16 @@ class Recipe extends Model
         'id' => 'string'
     ];
 
+    // fillableを追加
+    protected $fillable = [
+        'id',
+        'user_id',
+        'category_id',
+        'title',
+        'description',
+        'image',
+    ];
+
     public function category()
     {
         // return $this->hasOne(Category::class);

@@ -75,9 +75,9 @@ class RecipeController extends Controller
         $recipe = new Recipe();
         $recipe->id = Str::uuid()->toString();
         $recipe->user_id = auth()->id();
-        $recipe->category_id = $validatedData['category_id'];
-        $recipe->title = $validatedData['title'];
-        $recipe->description = $validatedData['description'];
+    
+        // fillを使ってデータをまとめて代入
+        $recipe->fill($validatedData);
     
         // 画像の保存 (もしあれば)
         if ($request->hasFile('image')) {
