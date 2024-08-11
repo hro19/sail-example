@@ -11,18 +11,11 @@ class Recipe extends Model
     use HasFactory;
     use SoftDeletes; //論理削除を使うために追加
 
-    protected $casts = [
-        'id' => 'string'
-    ];
+    public $incrementing = false;
+    protected $fillable = ['title', 'description', 'category_id', 'user_id', 'image'];
 
-    // fillableを追加
-    protected $fillable = [
-        'id',
-        'user_id',
-        'category_id',
-        'title',
-        'description',
-        'image',
+    protected $casts = [
+        'id' => 'string',
     ];
 
     public function category()

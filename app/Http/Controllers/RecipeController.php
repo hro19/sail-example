@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Recipe;
 use App\Models\Category;
+use App\Models\Ingredient; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
 
 class RecipeController extends Controller
 {
@@ -69,26 +71,40 @@ class RecipeController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'category_id' => 'required|exists:categories,id',
-            "image" => "file|image|mimes:jpeg,png,jpg,gif|max:2048",
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'ingredients' => 'required|array',
+            'ingredients.*.name' => 'required|string|max:255',
+            'ingredients.*.quantity' => 'required|string|max:100',
         ]);
-    
-        $recipe = new Recipe();
-        $recipe->id = Str::uuid()->toString();
-        $recipe->user_id = auth()->id();
-    
-        // fillを使ってデータをまとめて代入
-        $recipe->fill($validatedData);
-    
-        // 画像の保存 (もしあれば)
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('public/recipe_images');
-            $recipe->image = $imagePath;
-        }
-    
-        $recipe->save();
-    
-        return redirect()->route('recipe.index')->with('success', 'レシピが作成されました');
+
+        DB::transaction(function () use ($request, $validatedData) {
+            $recipe = new Recipe();
+            $recipe->id = Uuid::uuid4()->toString();
+            $recipe->user_id = auth()->id();
+            $recipe->title = $validatedData['title'];
+            $recipe->description = $validatedData['description'];
+            $recipe->category_id = $validatedData['category_id'];
+
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('recipe_images', 'public');
+                $recipe->image = $imagePath;
+            }
+
+            $recipe->save();
+            // dd($recipe->id);
+
+            // UUIDが正しく設定されていることを確認
+            \Log::info('Recipe ID after save: ' . $recipe->id);
+
+            foreach ($validatedData['ingredients'] as $ingredientData) {
+                $ingredient = new Ingredient($ingredientData);
+                $recipe->ingredients()->save($ingredient);
+            }
+        });
+
+        return redirect()->route('recipe.index')->with('success', 'レシピが正常に作成されました。');
     }
+    
 
     public function show(Recipe $recipe)
     {
